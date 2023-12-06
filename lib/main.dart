@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_assistant/pages/splash_screen.dart';
 
 import 'pages/home_page.dart';
 import 'pallete.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(useMaterial3: true).copyWith(
         scaffoldBackgroundColor: Pallete.whiteColor,
       ),
-      home:const  HomePage(),
+      home:const  SplashScreen(),
     );
   }
 }
