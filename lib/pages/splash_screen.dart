@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_assistant/pages/home_page.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_assistant/pages/onboarding_screen.dart';
 import 'package:my_assistant/pallete.dart';
 
 
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(milliseconds: 2000), () {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        return const HomePage();
+        return const OnBoardingScreen();
       }));
     });
   }

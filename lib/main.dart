@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_assistant/pages/splash_screen.dart';
 
-import 'pages/home_page.dart';
 import 'pallete.dart';
 
 void main() {
