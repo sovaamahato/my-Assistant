@@ -11,8 +11,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true,title: Text("My  Assistant ")),
-
+      appBar: AppBar(centerTitle: true, title: const Text("My  Assistant "),),
     );
   }
 }
