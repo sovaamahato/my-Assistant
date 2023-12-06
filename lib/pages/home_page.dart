@@ -1,4 +1,4 @@
-import 'package:animate_do/animate_do.dart';
+
 import 'package:flutter/material.dart';
 import 'package:my_assistant/feature_box.dart';
 
@@ -57,8 +57,8 @@ class _HomePageState extends State<HomePage> {
           ),
 
           //chat bubble
-          FadeInRight(
-            child: Container(
+          
+             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               margin:
                   const EdgeInsets.symmetric(horizontal: 35).copyWith(top: 10),
@@ -70,13 +70,13 @@ class _HomePageState extends State<HomePage> {
                 "Good Morning ! what task can i do for you?",
                 style: TextStyle(),
               ),
-            ),
+            
           ),
 
           //here are new features text
 
-          FadeInRight(
-            child: Padding(
+       
+           Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
               child: Container(
                 alignment: Alignment.centerLeft,
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
+            
           ),
           // //features box 2ota
           const FeatureBox(
