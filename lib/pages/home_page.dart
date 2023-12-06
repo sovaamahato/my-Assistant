@@ -102,6 +102,7 @@ class _HomePageState extends State<HomePage> {
               descriptionText:
                   "Get the best of worlds with a voice assistant powered by ChatGpt.",
               color: Pallete.secondSuggestionBoxColor),
+              
 
           //textfield
           Container(
