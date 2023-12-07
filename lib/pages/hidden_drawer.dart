@@ -29,18 +29,19 @@ class _HiddenDrawreState extends State<HiddenDrawre> {
           const HomePage()),
       ScreenHiddenDrawer(
           ItemHiddenMenu(
-              name: "home page 2",
-              baseStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              selectedStyle: const TextStyle()),
+              name: "HomePage 2",
+              baseStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              selectedStyle: const TextStyle(fontSize: 20)),
           const HomePage2()),
-      ScreenHiddenDrawer(
+
+ScreenHiddenDrawer(
           ItemHiddenMenu(
               name: "About Us",
-              baseStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              selectedStyle: const TextStyle()),
+              baseStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              selectedStyle: const TextStyle(fontSize: 20)),
           const AboutUs()),
+          
+          
     ];
   }
 

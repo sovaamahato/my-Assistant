@@ -61,10 +61,13 @@ class _HomePage2State extends State<HomePage2> {
   Future<void> systemSpeak(String content) async {
     await flutterTts.speak(content);
   }
+   Future<void> systemDontSpeak(String content) async {
+    await flutterTts.stop();
+  }
+
 
   @override
   void dispose() {
-   
     super.dispose();
     speechToText.stop();
     flutterTts.stop();
@@ -122,7 +125,7 @@ class _HomePage2State extends State<HomePage2> {
               height: 60,
             ),
             // assistant image
-          
+
             Stack(
               children: [
                 // Center(
@@ -134,9 +137,12 @@ class _HomePage2State extends State<HomePage2> {
                 //         shape: BoxShape.circle),
                 //   ),
                 // ),
-                Center(child: LottieBuilder.asset("assets/images/circle.json",height: 189,)),
+                Center(
+                    child: LottieBuilder.asset(
+                  "assets/images/circle.json",
+                  height: 189,
+                )),
                 Positioned(
-                 
                   child: Container(
                     height: 149,
                     decoration: const BoxDecoration(
@@ -151,7 +157,9 @@ class _HomePage2State extends State<HomePage2> {
                 ),
               ],
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
 
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -166,18 +174,20 @@ class _HomePage2State extends State<HomePage2> {
                     ? "Good Morning ! what task can i do for you?"
                     : generatedContent!,
                 style: TextStyle(
-                  color: Pallete.whiteColor,
+                    color: Pallete.whiteColor,
                     fontFamily: "Cera Pro",
                     fontSize: generatedContent == null ? 25 : 18),
               ),
             ),
-            const SizedBox(height: 20,),
-          
+            const SizedBox(
+              height: 20,
+            ),
+
             //textfield
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Pallete.assistantCircleColor),
+                  color: Pallete.secondSuggestionBoxColor),
               child: Row(children: [
                 Expanded(
                     child: Padding(
@@ -188,13 +198,19 @@ class _HomePage2State extends State<HomePage2> {
                         hintText: "Message", border: InputBorder.none),
                   ),
                 )),
-                GestureDetector(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    
+                    
+                    GestureDetector(
                     onTap: () async {
                       if (await speechToText.hasPermission &&
                           speechToText.isNotListening) {
                         await startListening();
                       } else if (speechToText.isListening) {
-                        final speech = await openAIService.chatGPTAPI(lastWords);
+                        final speech =
+                            await openAIService.chatGPTAPI(lastWords);
                         await systemSpeak(speech);
                         // print(lastWords);
                         generatedContent = speech;
@@ -204,15 +220,25 @@ class _HomePage2State extends State<HomePage2> {
                         initSpeechToText();
                       }
                     },
-                    child: const Icon(Icons.mic)),
+                    child: speechToText.isListening
+                        ? LottieBuilder.asset(
+                            "assets/images/mic_animate.json",
+                            height: 100,
+                          )
+                        : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: const Icon(Icons.mic,size: 35,),
+                        )),
                 GestureDetector(
                     onTap: () async {
                       final speech =
                           await openAIService.chatGPTAPI(textController.text);
+                          
                       await systemSpeak(speech);
+
                       generatedContent = speech;
                       textController.clear();
-          
+
                       setState(() {});
                     },
                     child: const Padding(
@@ -223,6 +249,8 @@ class _HomePage2State extends State<HomePage2> {
                         color: Colors.black,
                       ),
                     )),
+                  ],
+                )
               ]),
             )
           ]),

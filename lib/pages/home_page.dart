@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
 import 'package:my_assistant/feature_box.dart';
 
 import '../pallete.dart';
@@ -113,6 +114,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //chat bubble
+                    SizedBox(height: 70,),
 
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -132,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 20,
                     ),
 
                     //here are new features text
@@ -153,22 +155,19 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     // //features box 2ota
-                    const Visibility(
-                      child: Column(
-                        children: [
-                          FeatureBox(
-                              headerText: "Chat GPT",
-                              descriptionText:
-                                  "A smarter way to stay organized with chat GPT",
-                              color: Pallete.secondSuggestionBoxColor),
-                          FeatureBox(
-                              headerText: "Voice Assistant ",
-                              descriptionText:
-                                  "Get the best of worlds with a voice assistant powered by ChatGpt.",
-                              color: Pallete.secondSuggestionBoxColor),
-                        ],
-                      ),
-                    ),
+                    FeatureBox(
+                        headerText: "Chat GPT",
+                        descriptionText:
+                            "A smarter way to stay organized with chat GPT",
+                        color: Pallete.secondSuggestionBoxColor),
+                    FeatureBox(
+                        headerText: "Voice Assistant ",
+                        descriptionText:
+                            "Get the best of worlds with a voice assistant powered by ChatGpt.",
+                        color: Pallete.secondSuggestionBoxColor),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
 
                     //try now button
                     GestureDetector(
@@ -179,20 +178,27 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 18, vertical: 13),
-                        decoration: BoxDecoration(
-                            color: Pallete.color10,
-                            borderRadius: BorderRadius.circular(40)),
-                        child: const Text(
-                          "Try Now",
-                          style: TextStyle(
-                            fontFamily: "Cera Pro",
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
+                      child: Stack(
+                        children: [
+                          LottieBuilder.asset(
+                            "assets/images/button.json",
+                            width: 500,
+                            height: 300,
                           ),
-                        ),
+                          Positioned(
+                            top: 130,
+                            left: MediaQuery.of(context).size.width / 3,
+                            child: const Text(
+                              "Try Now",
+                              style: TextStyle(
+                                fontFamily: "Cera Pro",
+                                fontSize: 25,
+                                color: Pallete.firstSuggestionBoxColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     )
 
