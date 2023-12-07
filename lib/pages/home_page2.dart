@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
+import '../openai_services.dart';
 import '../pallete.dart';
 
 class HomePage2 extends StatefulWidget {
@@ -10,22 +15,76 @@ class HomePage2 extends StatefulWidget {
 }
 
 class _HomePage2State extends State<HomePage2> {
+  final speechToText = SpeechToText();
+
+  String lastWords = '';
+  final OpenAIService openAIService = OpenAIService();
+
+  final FlutterTts flutterTts = FlutterTts();
+  
+  TextEditingController textController = TextEditingController();
+  String? generatedContent;
+   void initState() {
+    super.initState();
+    initSpeechToText();
+    initTextToSpeech();
+  }
+
+  Future<void> initSpeechToText() async {
+    await speechToText.initialize();
+    setState(() {});
+  }
+
+  Future<void> initTextToSpeech() async {
+    await flutterTts.setSharedInstance(true);
+    setState(() {});
+  }
+
+  Future<void> startListening() async {
+    await speechToText.listen(onResult: _onSpeechResult);
+    setState(() {});
+  }
+
+  Future<void> stopListening() async {
+    await speechToText.stop();
+    setState(() {});
+  }
+
+  void _onSpeechResult(SpeechRecognitionResult result) {
+    setState(() {
+      lastWords = result.recognizedWords;
+    });
+  }
+
+  //to make system tospeak
+  Future<void> systemSpeak(String content) async {
+    await flutterTts.speak(content);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    speechToText.stop();
+    flutterTts.stop();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Colors.transparent,
-        centerTitle: true,
-        leading: const Icon(
-          Icons.menu,
-        ),
-        title: const Text(
-          "My  Assistant ",
-          style: TextStyle(fontFamily: "Cera Pro", fontWeight: FontWeight.bold),
-        ),
-      ),
+      // appBar: AppBar(
+      //   // backgroundColor: Colors.transparent,
+      //   centerTitle: true,
+      //   leading: const Icon(
+      //     Icons.menu,
+      //   ),
+      //   title: const Text(
+      //     "My  Assistant ",
+      //     style: TextStyle(fontFamily: "Cera Pro", fontWeight: FontWeight.bold),
+      //   ),
+      // ),
       body: Container(
+        alignment: Alignment.center,
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
           decoration: const BoxDecoration(
@@ -56,7 +115,38 @@ class _HomePage2State extends State<HomePage2> {
                 ]),
                 
           ),
-          child: Column(children: [Container(
+          child: Column(children: [
+            const SizedBox(
+                      height: 40,
+                    ),
+                   // assistant image
+
+                    Stack(
+                      children: [
+                        // Center(
+                        //   child: Container(
+                        //     height: 120,
+                        //     width: 120,
+                        //     decoration: const BoxDecoration(
+                        //         color: Pallete.assistantCircleColor,
+                        //         shape: BoxShape.circle),
+                        //   ),
+                        // ),
+                        LottieBuilder.asset("assets/images/animation.json"),
+                        Container(
+                          height: 149,
+                          decoration: const BoxDecoration(
+                            //shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage(
+                                "assets/images/voiceAssistant.png",
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+            Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30, vertical: 10),
                       margin: const EdgeInsets.symmetric(horizontal: 35)
@@ -65,14 +155,68 @@ class _HomePage2State extends State<HomePage2> {
                           border: Border.all(color: Pallete.borderColor),
                           borderRadius: BorderRadius.circular(20)
                               .copyWith(topLeft: Radius.zero)),
-                      // child: Text(
-                      //   generatedContent == null
-                      //       ? "Good Morning ! what task can i do for you?"
-                      //       : generatedContent!,
-                      //   style: TextStyle(
-                      //       fontFamily: "Cera Pro",
-                      //       fontSize: generatedContent == null ? 25 : 18),
-                      // ),
+                      child: Text(
+                        generatedContent == null
+                            ? "Good Morning ! what task can i do for you?"
+                            : generatedContent!,
+                        style: TextStyle(
+                            fontFamily: "Cera Pro",
+                            fontSize: generatedContent == null ? 25 : 18),
+                      ),
+                    ),
+                    
+                    //textfield
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Pallete.assistantCircleColor),
+                      child: Row(children: [
+                        Expanded(
+                            child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: textController,
+                            decoration: const InputDecoration(
+                                hintText: "Message", border: InputBorder.none),
+                          ),
+                        )),
+                        GestureDetector(
+                            onTap: () async {
+                              if (await speechToText.hasPermission &&
+                                  speechToText.isNotListening) {
+                                await startListening();
+                              } else if (speechToText.isListening) {
+                                final speech =
+                                    await openAIService.chatGPTAPI(lastWords);
+                                await systemSpeak(speech);
+                                // print(lastWords);
+                                generatedContent = speech;
+                                setState(() {});
+                                await stopListening();
+                              }else{
+                                initSpeechToText();
+                              }
+                            },
+                            child: const Icon(Icons.mic)),
+                        GestureDetector(
+                          onTap: () async {
+                            final speech =
+                                await openAIService.chatGPTAPI(textController.text);
+                            await systemSpeak(speech);
+                            generatedContent = speech;
+                            textController.clear();
+
+                            setState(() {});
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child:  Icon(
+                              Icons.send,
+                              size: 35,
+                              color: Colors.black,
+                            ),)
+                          ),
+                      ]),
                     )]),
           ),
           

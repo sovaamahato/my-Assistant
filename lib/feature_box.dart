@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_assistant/pallete.dart';
 
 class FeatureBox extends StatelessWidget {
   final headerText;
@@ -9,9 +10,17 @@ class FeatureBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
       margin: const EdgeInsets.all(12),
       decoration:
-          BoxDecoration(color: color, borderRadius: BorderRadius.circular(20)),
+          BoxDecoration(color: color, borderRadius: BorderRadius.circular(20),boxShadow:const [
+           BoxShadow(color: Pallete.color7,
+            offset:  Offset(5, 5),
+            blurRadius: 10),
+            BoxShadow(color: Pallete.color4,
+            offset:  Offset(-5, -5),
+            blurRadius: 10),
+          ]),
       child: Padding(
        padding: const EdgeInsets.symmetric(vertical: 10, horizontal:25 ),
         child: Column(

@@ -17,59 +17,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final speechToText = SpeechToText();
+  
 
-  String lastWords = '';
-  final OpenAIService openAIService = OpenAIService();
-
-  final FlutterTts flutterTts = FlutterTts();
-  String? generatedContent;
-  TextEditingController textController = TextEditingController();
-
-  void initState() {
-    super.initState();
-    initSpeechToText();
-    initTextToSpeech();
-  }
-
-  Future<void> initSpeechToText() async {
-    await speechToText.initialize();
-    setState(() {});
-  }
-
-  Future<void> initTextToSpeech() async {
-    await flutterTts.setSharedInstance(true);
-    setState(() {});
-  }
-
-  Future<void> startListening() async {
-    await speechToText.listen(onResult: _onSpeechResult);
-    setState(() {});
-  }
-
-  Future<void> stopListening() async {
-    await speechToText.stop();
-    setState(() {});
-  }
-
-  void _onSpeechResult(SpeechRecognitionResult result) {
-    setState(() {
-      lastWords = result.recognizedWords;
-    });
-  }
-
-  //to make system tospeak
-  Future<void> systemSpeak(String content) async {
-    await flutterTts.speak(content);
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    speechToText.stop();
-    flutterTts.stop();
-  }
+ 
 
   // when user want to close the app
   void showBackDialog() {
@@ -171,35 +121,7 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
-                    // assistant image
-
-                    // Stack(
-                    //   children: [
-                    //     Center(
-                    //       child: Container(
-                    //         height: 120,
-                    //         width: 120,
-                    //         decoration: const BoxDecoration(
-                    //             color: Pallete.assistantCircleColor,
-                    //             shape: BoxShape.circle),
-                    //       ),
-                    //     ),
-                    //     Container(
-                    //       height: 129,
-                    //       decoration: const BoxDecoration(
-                    //         shape: BoxShape.circle,
-                    //         image: DecorationImage(
-                    //           image: AssetImage(
-                    //             "assets/images/voiceAssistant.png",
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
+                    
 
                     //chat bubble
 
@@ -226,34 +148,31 @@ class _HomePageState extends State<HomePage> {
 
                     //here are new features text
 
-                    Visibility(
-                      visible: generatedContent == null,
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 20, right: 20, top: 15),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: const Text(
-                            "Here are new features",
-                            style: TextStyle(
-                                fontFamily: "Cera Pro",
-                                fontSize: 20,
-                                color: Pallete.mainFontColor,
-                                fontWeight: FontWeight.bold),
-                          ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, top: 15),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text(
+                          "Here are new features",
+                          style: TextStyle(
+                              fontFamily: "Cera Pro",
+                              fontSize: 20,
+                              color: Pallete.mainFontColor,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
                     // //features box 2ota
                     Visibility(
-                      visible: generatedContent == null,
+                     
                       child: const Column(
                         children: [
                           FeatureBox(
                               headerText: "Chat GPT",
                               descriptionText:
                                   "A smarter way to stay organized with chat GPT",
-                              color: Pallete.firstSuggestionBoxColor),
+                              color:Pallete.secondSuggestionBoxColor),
                           FeatureBox(
                               headerText: "Voice Assistant ",
                               descriptionText:
