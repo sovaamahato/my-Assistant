@@ -41,6 +41,7 @@ dependencies:
   speech_to_text: ^6.3.0
   http: ^1.1.2
   flutter_tts: ^3.8.5
+  hidden_drawer_menu: ^3.0.1
 
 dev_dependencies:
   flutter_test:
