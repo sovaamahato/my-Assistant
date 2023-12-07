@@ -27,20 +27,21 @@ class _HiddenDrawreState extends State<HiddenDrawre> {
               name: "Landing Page ",
               baseStyle: TextStyle(),
               selectedStyle: TextStyle()),
-          HomePage()),
+         const HomePage()),
       ScreenHiddenDrawer(
           ItemHiddenMenu(
               name: "home page 2",
               baseStyle: TextStyle(),
               selectedStyle: TextStyle()),
-          HomePage2()),
+         const  HomePage2(),),
 
 ScreenHiddenDrawer(
+   
           ItemHiddenMenu(
               name: "home page 2",
               baseStyle: TextStyle(),
               selectedStyle: TextStyle()),
-          AboutUs()),
+          const AboutUs()),
           
           
     ];

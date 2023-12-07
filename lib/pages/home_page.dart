@@ -17,10 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
-
- 
-
   // when user want to close the app
   void showBackDialog() {
     showDialog<void>(
@@ -121,8 +117,6 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    
-
                     //chat bubble
 
                     Container(
@@ -134,17 +128,17 @@ class _HomePageState extends State<HomePage> {
                           //border: Border.all(color: Pallete.borderColor),
                           borderRadius: BorderRadius.circular(20)
                               .copyWith(topLeft: Radius.zero)),
-                      child:const  Text(
-                        
-                             "Hello ! what task can i do for you?",
-                            
-                        style:  TextStyle(
+                      child: const Text(
+                        "Hello ! what task can i do for you?",
+                        style: TextStyle(
                             fontFamily: "Cera Pro",
-                            fontSize: 25 ,
-                            color:Pallete.whiteColor),
+                            fontSize: 25,
+                            color: Pallete.whiteColor),
                       ),
                     ),
-                    const SizedBox(height: 50,),
+                    const SizedBox(
+                      height: 50,
+                    ),
 
                     //here are new features text
 
@@ -165,14 +159,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                     // //features box 2ota
                     Visibility(
-                     
                       child: const Column(
                         children: [
                           FeatureBox(
                               headerText: "Chat GPT",
                               descriptionText:
                                   "A smarter way to stay organized with chat GPT",
-                              color:Pallete.secondSuggestionBoxColor),
+                              color: Pallete.secondSuggestionBoxColor),
                           FeatureBox(
                               headerText: "Voice Assistant ",
                               descriptionText:
@@ -196,12 +189,23 @@ class _HomePageState extends State<HomePage> {
                             horizontal: 18, vertical: 13),
                         decoration: BoxDecoration(
                             color: Pallete.color10,
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Pallete.color7,
+                                  offset: Offset(5, 5),
+                                  blurRadius: 10),
+                              BoxShadow(
+                                  color: Pallete.color4,
+                                  offset: Offset(-5, -5),
+                                  blurRadius: 10),
+                            ],
                             borderRadius: BorderRadius.circular(40)),
                         child: Text(
                           "Try Now",
                           style: TextStyle(
                             fontFamily: "Cera Pro",
-                            fontSize: 30,
+                            fontSize: 25,
+                            color: Colors.deepPurple,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
