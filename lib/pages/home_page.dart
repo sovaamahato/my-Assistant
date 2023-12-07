@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:my_assistant/feature_box.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart';
 
-import '../openai_services.dart';
 import '../pallete.dart';
 import 'home_page2.dart';
 
@@ -61,7 +57,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      // canPop: false,
+       canPop: false,
 
       onPopInvoked: (bool didPop) {
         if (didPop) {
@@ -158,15 +154,15 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                               fontFamily: "Cera Pro",
                               fontSize: 20,
-                              color: Pallete.mainFontColor,
+                              color: Pallete.whiteColor,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
                     // //features box 2ota
-                    Visibility(
+                    const Visibility(
                      
-                      child: const Column(
+                      child: Column(
                         children: [
                           FeatureBox(
                               headerText: "Chat GPT",
@@ -197,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                         decoration: BoxDecoration(
                             color: Pallete.color10,
                             borderRadius: BorderRadius.circular(40)),
-                        child: Text(
+                        child: const Text(
                           "Try Now",
                           style: TextStyle(
                             fontFamily: "Cera Pro",

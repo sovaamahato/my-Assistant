@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
+import 'package:my_assistant/pages/home_page.dart';
 import 'package:my_assistant/pages/home_page2.dart';
 
 import '../pallete.dart';
@@ -23,9 +24,9 @@ class _HiddenDrawreState extends State<HiddenDrawre> {
       ScreenHiddenDrawer(
           ItemHiddenMenu(
               name: "SparkyBot",
-              baseStyle: TextStyle(),
-              selectedStyle: TextStyle()),
-          HomePage2())
+              baseStyle: const TextStyle(),
+              selectedStyle: const TextStyle()),
+          const HomePage())
     ];
   }
 

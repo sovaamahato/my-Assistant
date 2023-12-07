@@ -3,7 +3,6 @@ import 'package:my_assistant/intro_screens/intro_screen1.dart';
 import 'package:my_assistant/intro_screens/intro_screen2.dart';
 import 'package:my_assistant/intro_screens/intro_screen3.dart';
 import 'package:my_assistant/pages/hidden_drawer.dart';
-import 'package:my_assistant/pages/home_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -73,7 +72,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
                                 //return const HomePage();
-                                return HiddenDrawre();
+                                return const HiddenDrawre();
                               },
                             ));
                           },

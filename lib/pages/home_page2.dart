@@ -24,6 +24,7 @@ class _HomePage2State extends State<HomePage2> {
 
   TextEditingController textController = TextEditingController();
   String? generatedContent;
+  @override
   void initState() {
     super.initState();
     initSpeechToText();
@@ -63,7 +64,7 @@ class _HomePage2State extends State<HomePage2> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+   
     super.dispose();
     speechToText.stop();
     flutterTts.stop();
@@ -150,7 +151,7 @@ class _HomePage2State extends State<HomePage2> {
                 ),
               ],
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
 
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -165,11 +166,12 @@ class _HomePage2State extends State<HomePage2> {
                     ? "Good Morning ! what task can i do for you?"
                     : generatedContent!,
                 style: TextStyle(
+                  color: Pallete.whiteColor,
                     fontFamily: "Cera Pro",
                     fontSize: generatedContent == null ? 25 : 18),
               ),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
           
             //textfield
             Container(
