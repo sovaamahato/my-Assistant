@@ -21,10 +21,10 @@ class _HomePage2State extends State<HomePage2> {
   final OpenAIService openAIService = OpenAIService();
 
   final FlutterTts flutterTts = FlutterTts();
-  
+
   TextEditingController textController = TextEditingController();
   String? generatedContent;
-   void initState() {
+  void initState() {
     super.initState();
     initSpeechToText();
     initTextToSpeech();
@@ -68,6 +68,7 @@ class _HomePage2State extends State<HomePage2> {
     speechToText.stop();
     flutterTts.stop();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -85,141 +86,146 @@ class _HomePage2State extends State<HomePage2> {
       // ),
       body: Container(
         alignment: Alignment.center,
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            gradient: RadialGradient(
-                transform: GradientRotation(3),
-                center: Alignment.topRight,
-                radius: 3,
-                // tileMode: TileMode.clamp,
-                colors: [
-                  //  Pallete.color1,
-                  Pallete.color2,
-                  // Pallete.color2,
-                  Pallete.color3,
-                  //  Pallete.color4,
-                  Pallete.color5,
-                  Pallete.color6,
-                  //  Pallete.color7,
-                  // Pallete.color8,
-                  Pallete.color9,
+        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: RadialGradient(
+              transform: GradientRotation(3),
+              center: Alignment.topRight,
+              radius: 3,
+              // tileMode: TileMode.clamp,
+              colors: [
+                //  Pallete.color1,
+                Pallete.color2,
+                // Pallete.color2,
+                Pallete.color3,
+                //  Pallete.color4,
+                Pallete.color5,
+                Pallete.color6,
+                //  Pallete.color7,
+                // Pallete.color8,
+                Pallete.color9,
 
-                  //  Pallete.color10,
+                //  Pallete.color10,
 
-                  // Pallete.whiteColor,
+                // Pallete.whiteColor,
 
-                  // Pallete.color4,
-                  // Pallete.color10,
-                  // Pallete.whiteColor,
-                ]),
-                
-          ),
+                // Pallete.color4,
+                // Pallete.color10,
+                // Pallete.whiteColor,
+              ]),
+        ),
+        child: SingleChildScrollView(
           child: Column(children: [
             const SizedBox(
-                      height: 40,
-                    ),
-                   // assistant image
-
-                    Stack(
-                      children: [
-                        // Center(
-                        //   child: Container(
-                        //     height: 120,
-                        //     width: 120,
-                        //     decoration: const BoxDecoration(
-                        //         color: Pallete.assistantCircleColor,
-                        //         shape: BoxShape.circle),
-                        //   ),
-                        // ),
-                        LottieBuilder.asset("assets/images/animation.json"),
-                        Container(
-                          height: 149,
-                          decoration: const BoxDecoration(
-                            //shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: AssetImage(
-                                "assets/images/voiceAssistant.png",
-                              ),
-                            ),
-                          ),
+              height: 60,
+            ),
+            // assistant image
+          
+            Stack(
+              children: [
+                // Center(
+                //   child: Container(
+                //     height: 120,
+                //     width: 120,
+                //     decoration: const BoxDecoration(
+                //         color: Pallete.assistantCircleColor,
+                //         shape: BoxShape.circle),
+                //   ),
+                // ),
+                Center(child: LottieBuilder.asset("assets/images/circle.json",height: 189,)),
+                Positioned(
+                 
+                  child: Container(
+                    height: 149,
+                    decoration: const BoxDecoration(
+                      //shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(
+                          "assets/images/voiceAssistant.png",
                         ),
-                      ],
-                    ),
-            Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 10),
-                      margin: const EdgeInsets.symmetric(horizontal: 35)
-                          .copyWith(top: 10),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Pallete.borderColor),
-                          borderRadius: BorderRadius.circular(20)
-                              .copyWith(topLeft: Radius.zero)),
-                      child: Text(
-                        generatedContent == null
-                            ? "Good Morning ! what task can i do for you?"
-                            : generatedContent!,
-                        style: TextStyle(
-                            fontFamily: "Cera Pro",
-                            fontSize: generatedContent == null ? 25 : 18),
                       ),
                     ),
-                    
-                    //textfield
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Pallete.assistantCircleColor),
-                      child: Row(children: [
-                        Expanded(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextField(
-                            controller: textController,
-                            decoration: const InputDecoration(
-                                hintText: "Message", border: InputBorder.none),
-                          ),
-                        )),
-                        GestureDetector(
-                            onTap: () async {
-                              if (await speechToText.hasPermission &&
-                                  speechToText.isNotListening) {
-                                await startListening();
-                              } else if (speechToText.isListening) {
-                                final speech =
-                                    await openAIService.chatGPTAPI(lastWords);
-                                await systemSpeak(speech);
-                                // print(lastWords);
-                                generatedContent = speech;
-                                setState(() {});
-                                await stopListening();
-                              }else{
-                                initSpeechToText();
-                              }
-                            },
-                            child: const Icon(Icons.mic)),
-                        GestureDetector(
-                          onTap: () async {
-                            final speech =
-                                await openAIService.chatGPTAPI(textController.text);
-                            await systemSpeak(speech);
-                            generatedContent = speech;
-                            textController.clear();
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20,),
 
-                            setState(() {});
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.all(14.0),
-                            child:  Icon(
-                              Icons.send,
-                              size: 35,
-                              color: Colors.black,
-                            ),)
-                          ),
-                      ]),
-                    )]),
-          ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 35).copyWith(top: 10),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Pallete.borderColor),
+                  borderRadius:
+                      BorderRadius.circular(20).copyWith(topLeft: Radius.zero)),
+              child: Text(
+                generatedContent == null
+                    ? "Good Morning ! what task can i do for you?"
+                    : generatedContent!,
+                style: TextStyle(
+                    fontFamily: "Cera Pro",
+                    fontSize: generatedContent == null ? 25 : 18),
+              ),
+            ),
+            SizedBox(height: 20,),
           
+            //textfield
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Pallete.assistantCircleColor),
+              child: Row(children: [
+                Expanded(
+                    child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: textController,
+                    decoration: const InputDecoration(
+                        hintText: "Message", border: InputBorder.none),
+                  ),
+                )),
+                GestureDetector(
+                    onTap: () async {
+                      if (await speechToText.hasPermission &&
+                          speechToText.isNotListening) {
+                        await startListening();
+                      } else if (speechToText.isListening) {
+                        final speech = await openAIService.chatGPTAPI(lastWords);
+                        await systemSpeak(speech);
+                        // print(lastWords);
+                        generatedContent = speech;
+                        setState(() {});
+                        await stopListening();
+                      } else {
+                        initSpeechToText();
+                      }
+                    },
+                    child: const Icon(Icons.mic)),
+                GestureDetector(
+                    onTap: () async {
+                      final speech =
+                          await openAIService.chatGPTAPI(textController.text);
+                      await systemSpeak(speech);
+                      generatedContent = speech;
+                      textController.clear();
+          
+                      setState(() {});
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(14.0),
+                      child: Icon(
+                        Icons.send,
+                        size: 35,
+                        color: Colors.black,
+                      ),
+                    )),
+              ]),
+            )
+          ]),
+        ),
+      ),
     ));
   }
 }
