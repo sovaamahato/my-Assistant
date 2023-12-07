@@ -13,10 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
-
- 
-
   // when user want to close the app
   void showBackDialog() {
     showDialog<void>(
@@ -57,8 +53,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-       canPop: false,
-
+      canPop: false,
       onPopInvoked: (bool didPop) {
         if (didPop) {
           return;
@@ -117,8 +112,6 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    
-
                     //chat bubble
 
                     Container(
@@ -130,17 +123,17 @@ class _HomePageState extends State<HomePage> {
                           //border: Border.all(color: Pallete.borderColor),
                           borderRadius: BorderRadius.circular(20)
                               .copyWith(topLeft: Radius.zero)),
-                      child:const  Text(
-                        
-                             "Hello ! what task can i do for you?",
-                            
-                        style:  TextStyle(
+                      child: const Text(
+                        "Hello ! what task can i do for you?",
+                        style: TextStyle(
                             fontFamily: "Cera Pro",
-                            fontSize: 25 ,
-                            color:Pallete.whiteColor),
+                            fontSize: 25,
+                            color: Pallete.whiteColor),
                       ),
                     ),
-                    const SizedBox(height: 50,),
+                    const SizedBox(
+                      height: 50,
+                    ),
 
                     //here are new features text
 
@@ -161,14 +154,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                     // //features box 2ota
                     const Visibility(
-                     
                       child: Column(
                         children: [
                           FeatureBox(
                               headerText: "Chat GPT",
                               descriptionText:
                                   "A smarter way to stay organized with chat GPT",
-                              color:Pallete.secondSuggestionBoxColor),
+                              color: Pallete.secondSuggestionBoxColor),
                           FeatureBox(
                               headerText: "Voice Assistant ",
                               descriptionText:

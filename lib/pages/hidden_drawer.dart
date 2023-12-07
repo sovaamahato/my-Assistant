@@ -4,7 +4,7 @@ import 'package:my_assistant/pages/home_page.dart';
 import 'package:my_assistant/pages/home_page2.dart';
 
 import '../pallete.dart';
-
+import 'about_us.dart';
 
 class HiddenDrawre extends StatefulWidget {
   const HiddenDrawre({Key? key}) : super(key: key);
@@ -17,22 +17,40 @@ class _HiddenDrawreState extends State<HiddenDrawre> {
   List<ScreenHiddenDrawer> _pages = [];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _pages = [
       ScreenHiddenDrawer(
           ItemHiddenMenu(
-              name: "SparkyBot",
-              baseStyle: const TextStyle(),
+              name: "Landing Page ",
+              baseStyle:
+                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              selectedStyle: const TextStyle(fontSize: 20)),
+          const HomePage()),
+      ScreenHiddenDrawer(
+          ItemHiddenMenu(
+              name: "home page 2",
+              baseStyle:
+                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               selectedStyle: const TextStyle()),
-          const HomePage())
+          const HomePage2()),
+      ScreenHiddenDrawer(
+          ItemHiddenMenu(
+              name: "About Us",
+              baseStyle:
+                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              selectedStyle: const TextStyle()),
+          const AboutUs()),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
     return HiddenDrawerMenu(
-        screens: _pages, backgroundColorMenu: Pallete.firstSuggestionBoxColor,initPositionSelected: 0,);
+      screens: _pages,
+      backgroundColorMenu: Colors.deepPurple.shade200,
+      initPositionSelected: 0,
+      backgroundColorAppBar: Colors.deepPurple.shade200,
+    );
   }
 }
