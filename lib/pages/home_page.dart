@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:my_assistant/feature_box.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
+import '../openai_services.dart';
 import '../pallete.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,36 +16,58 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   final speechToText=SpeechToText();
+  final speechToText = SpeechToText();
 
-   String lastWords='';
+  String lastWords = '';
+  final OpenAIService openAIService = OpenAIService();
 
-   void initState() {
+  final FlutterTts flutterTts = FlutterTts();
+  String? generatedContent;
+  TextEditingController textController = TextEditingController();
+
+  void initState() {
     super.initState();
+    initSpeechToText();
     initTextToSpeech();
   }
 
-  /// This has to happen only once per app
-  Future <void> initTextToSpeech() async {
+  Future<void> initSpeechToText() async {
     await speechToText.initialize();
     setState(() {});
   }
-  Future <void> startListening() async {
+
+  Future<void> initTextToSpeech() async {
+    await flutterTts.setSharedInstance(true);
+    setState(() {});
+  }
+
+  Future<void> startListening() async {
     await speechToText.listen(onResult: _onSpeechResult);
     setState(() {});
   }
 
- 
-Future <void> stopListening() async {
+  Future<void> stopListening() async {
     await speechToText.stop();
     setState(() {});
   }
-
 
   void _onSpeechResult(SpeechRecognitionResult result) {
     setState(() {
       lastWords = result.recognizedWords;
     });
+  }
+
+  //to make system tospeak
+  Future<void> systemSpeak(String content) async {
+    await flutterTts.speak(content);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    speechToText.stop();
+    flutterTts.stop();
   }
 
   // when user want to close the app
@@ -86,15 +109,18 @@ Future <void> stopListening() async {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
+    return
+     PopScope(
+      // canPop: false,
+      
       onPopInvoked: (bool didPop) {
         if (didPop) {
           return;
         }
         showBackDialog();
       },
-      child: Scaffold(
+      child:
+       Scaffold(
         appBar: AppBar(
           centerTitle: true,
           leading: const Icon(
@@ -102,7 +128,8 @@ Future <void> stopListening() async {
           ),
           title: const Text(
             "My  Assistant ",
-            style: TextStyle(fontFamily: "Cera Pro", fontWeight: FontWeight.bold),
+            style:
+                TextStyle(fontFamily: "Cera Pro", fontWeight: FontWeight.bold),
           ),
         ),
         body: SingleChildScrollView(
@@ -112,100 +139,111 @@ Future <void> stopListening() async {
               height: 10,
             ),
             // assistant image
-      
+
             Stack(
               children: [
                 Center(
-                    child: Container(
-                  height: 120,
-                  width: 120,
-                  decoration: const BoxDecoration(
-                      color: Pallete.assistantCircleColor,
-                      shape: BoxShape.circle),
-                )),
+                  child: Container(
+                    height: 120,
+                    width: 120,
+                    decoration: const BoxDecoration(
+                        color: Pallete.assistantCircleColor,
+                        shape: BoxShape.circle),
+                  ),
+                ),
                 Container(
                   height: 129,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                        image: AssetImage(
-                      "assets/images/voiceAssistant.png",
-                    ),),
+                      image: AssetImage(
+                        "assets/images/voiceAssistant.png",
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
-      
+
             //chat bubble
-            
-               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 35).copyWith(top: 10),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Pallete.borderColor),
-                    borderRadius:
-                        BorderRadius.circular(20).copyWith(topLeft: Radius.zero)),
-                child: const Text(
-                  "Good Morning ! what task can i do for you?",
-                  style: TextStyle(),
-                ),
-              
+
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 35).copyWith(top: 10),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Pallete.borderColor),
+                  borderRadius:
+                      BorderRadius.circular(20).copyWith(topLeft: Radius.zero)),
+              child: const Text(
+                "Good Morning ! what task can i do for you?",
+                style: TextStyle(),
+              ),
             ),
-      
+
             //here are new features text
-      
-         
-             Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Here are new features",
-                    style: TextStyle(
-                        fontFamily: "Cera Pro",
-                        fontSize: 20,
-                        color: Pallete.mainFontColor,
-                        fontWeight: FontWeight.bold),
-                  ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                  "Here are new features",
+                  style: TextStyle(
+                      fontFamily: "Cera Pro",
+                      fontSize: 20,
+                      color: Pallete.mainFontColor,
+                      fontWeight: FontWeight.bold),
                 ),
-              
+              ),
             ),
             // //features box 2ota
             const FeatureBox(
                 headerText: "Chat GPT",
-                descriptionText: "A smarter way to stay organized with chat GPT",
+                descriptionText:
+                    "A smarter way to stay organized with chat GPT",
                 color: Pallete.firstSuggestionBoxColor),
-      
+
             const FeatureBox(
                 headerText: "Voice Assistant ",
                 descriptionText:
                     "Get the best of worlds with a voice assistant powered by ChatGpt.",
                 color: Pallete.secondSuggestionBoxColor),
-                
-const Spacer(),      
+
+            
             //textfield
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Pallete.assistantCircleColor),
               child: Row(children: [
-                const Expanded(
+                Expanded(
                     child: Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: textController,
+                    decoration: const InputDecoration(
                         hintText: "Message", border: InputBorder.none),
                   ),
                 )),
-                GestureDetector(onTap:()async{
-                  if(await speechToText.hasPermission && speechToText.isNotListening){
-                    await startListening();
-                  }else if(speechToText.isListening){
-                    print(lastWords);
-                  }
-
-                } ,child:const Icon(Icons.mic)),
+                GestureDetector(
+                    onTap: () async {
+                      if (await speechToText.hasPermission &&
+                          speechToText.isNotListening) {
+                        await startListening();
+                      } else if (speechToText.isListening) {
+                        final speech =
+                            await openAIService.chatGPTAPI(lastWords);
+                        await systemSpeak(speech);
+                        // print(lastWords);
+                        generatedContent = speech;
+                        setState(() {});
+                        await stopListening();
+                      }else{
+                        initSpeechToText();
+                      }
+                    },
+                    child: const Icon(Icons.mic)),
                 IconButton(onPressed: () {}, icon: const Icon(Icons.send)),
               ]),
             )
