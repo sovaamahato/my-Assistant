@@ -175,40 +175,52 @@ class _HomePageState extends State<HomePage> {
                   border: Border.all(color: Pallete.borderColor),
                   borderRadius:
                       BorderRadius.circular(20).copyWith(topLeft: Radius.zero)),
-              child: const Text(
-                "Good Morning ! what task can i do for you?",
-                style: TextStyle(),
+              child:  Text(generatedContent == null
+                    ? "Good Morning ! what task can i do for you?"
+                    : generatedContent!,
+                style: TextStyle(fontFamily: "Cera Pro", fontSize:generatedContent == null ? 25 : 18),
               ),
             ),
 
             //here are new features text
 
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: const Text(
-                  "Here are new features",
-                  style: TextStyle(
-                      fontFamily: "Cera Pro",
-                      fontSize: 20,
-                      color: Pallete.mainFontColor,
-                      fontWeight: FontWeight.bold),
+            Visibility(
+              visible: generatedContent==null,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: const Text(
+                    "Here are new features",
+                    style: TextStyle(
+                        fontFamily: "Cera Pro",
+                        fontSize: 20,
+                        color: Pallete.mainFontColor,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),
             // //features box 2ota
-            const FeatureBox(
-                headerText: "Chat GPT",
-                descriptionText:
-                    "A smarter way to stay organized with chat GPT",
-                color: Pallete.firstSuggestionBoxColor),
+            Visibility(
+              visible: generatedContent==null,
+              child: const Column(
+                children: [
+                   FeatureBox(
+                      headerText: "Chat GPT",
+                      descriptionText:
+                          "A smarter way to stay organized with chat GPT",
+                      color: Pallete.firstSuggestionBoxColor),
+                       FeatureBox(
+                  headerText: "Voice Assistant ",
+                  descriptionText:
+                      "Get the best of worlds with a voice assistant powered by ChatGpt.",
+                  color: Pallete.secondSuggestionBoxColor),
+                ],
+              ),
+            ),
 
-            const FeatureBox(
-                headerText: "Voice Assistant ",
-                descriptionText:
-                    "Get the best of worlds with a voice assistant powered by ChatGpt.",
-                color: Pallete.secondSuggestionBoxColor),
+            
 
             
             //textfield
@@ -244,7 +256,24 @@ class _HomePageState extends State<HomePage> {
                       }
                     },
                     child: const Icon(Icons.mic)),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.send)),
+                GestureDetector(
+                  onTap: () async {
+                    final speech =
+                        await openAIService.chatGPTAPI(textController.text);
+                    await systemSpeak(speech);
+                    generatedContent = speech;
+                    textController.clear();
+              
+                    setState(() {});
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(14.0),
+                    child:  Icon(
+                      Icons.send,
+                      size: 35,
+                      color: Colors.black,
+                    ),)
+                  ),
               ]),
             )
           ],
