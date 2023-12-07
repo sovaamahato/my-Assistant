@@ -19,7 +19,8 @@ class _HomePageState extends State<HomePage> {
 
    String lastWords='';
 
-   void initState() {
+   @override
+     void initState() {
     super.initState();
     initTextToSpeech();
   }
