@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
+import '../pallete.dart';
+
 class IntroPage1 extends StatelessWidget {
   const IntroPage1({super.key});
 
@@ -11,10 +13,29 @@ class IntroPage1 extends StatelessWidget {
       //backgroundColor: const Color.fromARGB(255, 199, 235, 246),
       body: Container(
         decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [
-            Color.fromARGB(255, 81, 148, 168),
-            Colors.white,
-          ])),
+              gradient: SweepGradient(
+               // center: Alignment.topRight,
+                // radius: 3,
+                colors: [
+              Pallete.color1,
+                Pallete.color2,
+                Pallete.color2,
+                Pallete.color3,
+              //  Pallete.color4,
+                 Pallete.color5,
+                 Pallete.color6,
+                Pallete.color7,
+             // Pallete.color8,
+              Pallete.color9,
+
+              //  Pallete.color10,
+
+              // Pallete.whiteColor,
+
+              // Pallete.color4,
+              // Pallete.color10,
+              // Pallete.whiteColor,
+            ])),
         child: Stack(
           children: [
             Column(
@@ -23,7 +44,7 @@ class IntroPage1 extends StatelessWidget {
                   height: 50,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 40, left: 20, right: 10),
+                  padding: const EdgeInsets.only(top: 60, left: 20, right: 10),
                   child: BounceInDown(child: Image.asset("assets/images/robo.png")),
                 ),
                 const Padding(
