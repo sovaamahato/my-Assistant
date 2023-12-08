@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.deepPurple.shade200,
           title: const Text('Are you sure?'),
           content: const Text(
             'Are you sure you want to leave this Application?',
@@ -114,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //chat bubble
-                    SizedBox(height: 70,),
+                    const SizedBox(height: 70,),
 
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -155,16 +156,34 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     // //features box 2ota
-                    FeatureBox(
-                        headerText: "Chat GPT",
-                        descriptionText:
-                            "A smarter way to stay organized with chat GPT",
-                        color: Pallete.secondSuggestionBoxColor),
-                    FeatureBox(
-                        headerText: "Voice Assistant ",
-                        descriptionText:
-                            "Get the best of worlds with a voice assistant powered by ChatGpt.",
-                        color: Pallete.secondSuggestionBoxColor),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage2(),
+                          ),
+                        );
+                      },
+                      child: const FeatureBox(
+                          headerText: "Chat GPT",
+                          descriptionText:
+                              "A smarter way to stay organized with chat GPT",
+                          color: Pallete.secondSuggestionBoxColor),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage2(),
+                          ),
+                        );
+                      },
+                      child: const FeatureBox(
+                          headerText: "Voice Assistant ",
+                          descriptionText:
+                              "Get the best of worlds with a voice assistant powered by ChatGpt.",
+                          color: Pallete.secondSuggestionBoxColor),
+                    ),
                     // const SizedBox(
                     //   height: 20,
                     // ),

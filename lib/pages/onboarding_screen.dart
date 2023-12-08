@@ -62,7 +62,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       onTap: () {
                         _controller.jumpToPage(2);
                       },
-                      child: const Text('skip')),
+                      child: Container(
+                         color: Colors.transparent,
+                        child: const Padding(
+                          padding: EdgeInsets.all(18.0),
+                          child: Text('skip'),
+                        ))),
                   SmoothPageIndicator(controller: _controller, count: 3),
 
                   //next
@@ -76,14 +81,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               },
                             ));
                           },
-                          child: const Text('Done'))
+                          child: Container(
+                             color: Colors.transparent,
+                            child: const Padding(
+                            padding: EdgeInsets.all(18.0),
+                            child: Text('Done'),
+                          )))
                       : GestureDetector(
                           onTap: () {
                             _controller.nextPage(
                                 duration: const Duration(milliseconds: 500),
                                 curve: Curves.easeIn);
                           },
-                          child: const Text('next')),
+                          child: Container(
+                            color: Colors.transparent,
+                            child: const Padding(
+                            padding: EdgeInsets.all(18.0),
+                            child: Text('next'),
+                          ))),
                 ],
               )),
         ],

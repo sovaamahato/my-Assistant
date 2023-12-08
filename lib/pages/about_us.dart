@@ -32,6 +32,6 @@ class AboutUs extends StatelessWidget {
                   // Pallete.color4,
                   // Pallete.color10,)
       ]),),
-      child: Center(child: Text("About us screen"))),);
+      child: const Center(child: Text("Developed using flutter \n. SparkyBot\n Version 1.0.0",style: TextStyle(color: Colors.white),))),);
   }
 }
