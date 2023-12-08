@@ -24,12 +24,14 @@ class _HomePage2State extends State<HomePage2> {
   bool isLoading = false;
 
   TextEditingController textController = TextEditingController();
+  bool isSpeechGenerated = false;
   String? generatedContent;
   @override
   void initState() {
     super.initState();
     initSpeechToText();
     initTextToSpeech();
+     isSpeechGenerated = false;
   }
 
   Future<void> initSpeechToText() async {
@@ -209,6 +211,7 @@ class _HomePage2State extends State<HomePage2> {
                 const SizedBox(
                   height: 20,
                 ),
+                
 
                 //textfield
                 Padding(
@@ -236,20 +239,20 @@ class _HomePage2State extends State<HomePage2> {
                                     speechToText.isNotListening) {
                                   await startListening();
                                 } else if (speechToText.isListening) {
+                                  
                                   final speech =
                                       await openAIService.chatGPTAPI(lastWords);
-                                  await systemSpeak(speech);
-                                  isLoading
-                                      ? const CircularProgressIndicator(
-                                          valueColor: AlwaysStoppedAnimation(
-                                              Colors.blue),
-                                        )
-                                      :
-                                      // print(lastWords);
-                                      generatedContent = speech;
-                                  setState(() {});
+                                
+                            await systemSpeak(speech);
+                          
+
+                          generatedContent = speech;
+                          isSpeechGenerated = true;
+
+                          setState(() {});
                                   await stopListening();
                                 } else {
+                                   isSpeechGenerated = false;
                                   initSpeechToText();
                                 }
                               },
@@ -270,6 +273,8 @@ class _HomePage2State extends State<HomePage2> {
                                     )),
                           GestureDetector(
                               onTap: () async {
+                                isLoading = true;
+                              try{
                                 final speech = await openAIService
                                     .chatGPTAPI(textController.text);
 
@@ -277,6 +282,11 @@ class _HomePage2State extends State<HomePage2> {
 
                                 generatedContent = speech;
                                 textController.clear();
+                              }catch(e) {
+                                //
+                              }finally{
+                                isLoading = false;
+                              }
 
                                 setState(() {});
                               },
@@ -288,6 +298,19 @@ class _HomePage2State extends State<HomePage2> {
                                   color: Colors.black,
                                 ),
                               )),
+
+                              Visibility(
+                                visible: isLoading==true,
+                                child: Container(child:CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation(Colors.blue),
+                            ) ,))
+                    //           Container(
+                    //   child: isLoading
+                    //       ? CircularProgressIndicator(
+                    //           valueColor: AlwaysStoppedAnimation(Colors.blue),
+                    //         )
+                    //       : Text(generatedContent!)
+                    // ),
                         ],
                       )
                     ]),
