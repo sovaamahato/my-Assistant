@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_assistant/pages/home_page.dart';
 import 'package:my_assistant/pages/onboarding_screen.dart';
 import 'package:my_assistant/pallete.dart';
+import 'package:my_assistant/utils/pref.dart';
+import 'package:my_assistant/widgets/custom_loading.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,9 +19,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 2000), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        return const OnBoardingScreen();
-      }));
+      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+      //   return Pref.showOnboarding
+      //       ? const OnBoardingScreen()
+      //       : const HomePage();
+      // }));
+
+      Get.off(() =>
+          Pref.showOnboarding ? const OnBoardingScreen() : const HomePage());
     });
   }
 
@@ -54,16 +63,18 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Center(
             child: Column(
           children: [
-            const Spacer(),
+            const Spacer(flex: 2),
             LottieBuilder.asset("assets/images/animation.json"),
             const SizedBox(
               height: 10,
             ),
             const Text(
-              "Version 1.0.0",
+              "Version 1.0.1",
               style: TextStyle(color: Colors.white),
             ),
             const Spacer(),
+            //lottie loading
+            const CustomLoading(),
             const Text(
               'made by : U&S',
               style:
