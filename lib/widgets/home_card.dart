@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lottie/lottie.dart';
 import 'package:my_assistant/utils/enum_home_type.dart';
 
@@ -8,6 +9,9 @@ class HomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //only for testing in developing phase
+      Animate.restartOnHotReload = true;
+
     Size mq = MediaQuery.of(context).size;
     return Card(
       color: Colors.blue.withOpacity(.2),
@@ -63,6 +67,6 @@ class HomeCard extends StatelessWidget {
                 const Spacer(),
               ],
             ),
-    );
+    ).animate().scale(duration: 1.seconds, curve: Curves.easeIn);
   }
 }
