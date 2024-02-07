@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_assistant/pages/feature/Image_feature.dart';
+import 'package:my_assistant/pages/feature/sparky_bot.dart';
+import 'package:my_assistant/pages/feature/translator_feature.dart';
 
 enum HomeType { aiChatBot, aiImage, aiTranslator }
 
@@ -28,5 +32,12 @@ extension MyHomeType on HomeType {
         HomeType.aiChatBot => EdgeInsets.zero,
         HomeType.aiImage => const EdgeInsets.all(20),
         HomeType.aiTranslator => EdgeInsets.zero,
+      };
+
+  //for padding
+  VoidCallback get onTap => switch (this) {
+        HomeType.aiChatBot => () => Get.to(() => const SparkyBot()),
+        HomeType.aiImage => () => Get.to(() => ImageFeature()),
+        HomeType.aiTranslator => () => Get.to(() => TranslatorFeature()),
       };
 }

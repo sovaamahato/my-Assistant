@@ -51,7 +51,7 @@ class _HiddenDrawreState extends State<HiddenDrawre> {
             ),
             colorLineSelected: Colors.deepPurple.shade300,
           ),
-          const HomePage2()),
+          const SparkyBot()),
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: "About Us",

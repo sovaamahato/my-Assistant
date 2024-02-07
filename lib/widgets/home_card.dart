@@ -10,7 +10,7 @@ class HomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //only for testing in developing phase
-      Animate.restartOnHotReload = true;
+    Animate.restartOnHotReload = true;
 
     Size mq = MediaQuery.of(context).size;
     return Card(
@@ -22,51 +22,55 @@ class HomeCard extends StatelessWidget {
           Radius.circular(20),
         ),
       ),
-      child: homeType.leftAlign
-          ? Row(
-              children: [
-                Container(
-                  width: mq.width * .35,
-                  padding: homeType.padding,
-                  child: Lottie.asset(
-                    'assets/lottie/${homeType.lottie}',
+      child: InkWell(
+        onTap: homeType.onTap,
+        borderRadius: BorderRadius.circular(20),
+        child: homeType.leftAlign
+            ? Row(
+                children: [
+                  Container(
+                    width: mq.width * .35,
+                    padding: homeType.padding,
+                    child: Lottie.asset(
+                      'assets/lottie/${homeType.lottie}',
+                    ),
                   ),
-                ),
-                const Spacer(),
-                Text(
-                  homeType.title,
-                  style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1),
-                ),
-                const Spacer(
-                  flex: 2,
-                ),
-              ],
-            )
-          : Row(
-              children: [
-                const Spacer(
-                  flex: 2,
-                ),
-                Text(
-                  homeType.title,
-                  style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1),
-                ),
-                Container(
-                  width: mq.width * .35,
-                  padding: homeType.padding,
-                  child: Lottie.asset(
-                    'assets/lottie/${homeType.lottie}',
+                  const Spacer(),
+                  Text(
+                    homeType.title,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1),
                   ),
-                ),
-                const Spacer(),
-              ],
-            ),
+                  const Spacer(
+                    flex: 2,
+                  ),
+                ],
+              )
+            : Row(
+                children: [
+                  const Spacer(
+                    flex: 2,
+                  ),
+                  Text(
+                    homeType.title,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1),
+                  ),
+                  Container(
+                    width: mq.width * .35,
+                    padding: homeType.padding,
+                    child: Lottie.asset(
+                      'assets/lottie/${homeType.lottie}',
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+      ),
     ).animate().scale(duration: 1.seconds, curve: Curves.easeIn);
   }
 }
