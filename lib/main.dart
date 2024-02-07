@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:my_assistant/pages/splash_screen.dart';
+import 'package:my_assistant/pages/startup_pages/splash_screen.dart';
 import 'package:my_assistant/utils/pref.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   // init hive
+  // init hive
   await Pref.initialize();
   //making app full screen
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
@@ -21,13 +20,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(useMaterial3: true),
       // .copyWith(
       //   //scaffoldBackgroundColor: Pallete.whiteColor,
       // ),
-      home:const  SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

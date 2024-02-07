@@ -4,8 +4,8 @@ import 'package:lottie/lottie.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
-import '../openai_services.dart';
-import '../pallete.dart';
+import '../../openai_services.dart';
+import '../../pallete.dart';
 
 class HomePage2 extends StatefulWidget {
   const HomePage2({super.key});
@@ -31,7 +31,7 @@ class _HomePage2State extends State<HomePage2> {
     super.initState();
     initSpeechToText();
     initTextToSpeech();
-     isSpeechGenerated = false;
+    isSpeechGenerated = false;
   }
 
   Future<void> initSpeechToText() async {
@@ -211,7 +211,6 @@ class _HomePage2State extends State<HomePage2> {
                 const SizedBox(
                   height: 20,
                 ),
-                
 
                 //textfield
                 Padding(
@@ -239,20 +238,18 @@ class _HomePage2State extends State<HomePage2> {
                                     speechToText.isNotListening) {
                                   await startListening();
                                 } else if (speechToText.isListening) {
-                                  
                                   final speech =
                                       await openAIService.chatGPTAPI(lastWords);
-                                
-                            await systemSpeak(speech);
-                          
 
-                          generatedContent = speech;
-                          isSpeechGenerated = true;
+                                  await systemSpeak(speech);
 
-                          setState(() {});
+                                  generatedContent = speech;
+                                  isSpeechGenerated = true;
+
+                                  setState(() {});
                                   await stopListening();
                                 } else {
-                                   isSpeechGenerated = false;
+                                  isSpeechGenerated = false;
                                   initSpeechToText();
                                 }
                               },
@@ -274,19 +271,19 @@ class _HomePage2State extends State<HomePage2> {
                           GestureDetector(
                               onTap: () async {
                                 isLoading = true;
-                              try{
-                                final speech = await openAIService
-                                    .chatGPTAPI(textController.text);
+                                try {
+                                  final speech = await openAIService
+                                      .chatGPTAPI(textController.text);
 
-                                await systemSpeak(speech);
+                                  await systemSpeak(speech);
 
-                                generatedContent = speech;
-                                textController.clear();
-                              }catch(e) {
-                                //
-                              }finally{
-                                isLoading = false;
-                              }
+                                  generatedContent = speech;
+                                  textController.clear();
+                                } catch (e) {
+                                  //
+                                } finally {
+                                  isLoading = false;
+                                }
 
                                 setState(() {});
                               },
@@ -299,18 +296,21 @@ class _HomePage2State extends State<HomePage2> {
                                 ),
                               )),
 
-                              Visibility(
-                                visible: isLoading==true,
-                                child: Container(child:CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation(Colors.blue),
-                            ) ,))
-                    //           Container(
-                    //   child: isLoading
-                    //       ? CircularProgressIndicator(
-                    //           valueColor: AlwaysStoppedAnimation(Colors.blue),
-                    //         )
-                    //       : Text(generatedContent!)
-                    // ),
+                          Visibility(
+                              visible: isLoading == true,
+                              child: Container(
+                                child: CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.blue),
+                                ),
+                              ))
+                          //           Container(
+                          //   child: isLoading
+                          //       ? CircularProgressIndicator(
+                          //           valueColor: AlwaysStoppedAnimation(Colors.blue),
+                          //         )
+                          //       : Text(generatedContent!)
+                          // ),
                         ],
                       )
                     ]),

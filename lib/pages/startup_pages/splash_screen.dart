@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:my_assistant/pages/home_page.dart';
-import 'package:my_assistant/pages/onboarding_screen.dart';
+import 'package:my_assistant/pages/landin_page.dart';
+import 'package:my_assistant/pages/startup_pages/onboarding_screen.dart';
 import 'package:my_assistant/pallete.dart';
 import 'package:my_assistant/utils/pref.dart';
 import 'package:my_assistant/widgets/custom_loading.dart';
@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       // }));
 
       Get.off(() =>
-          Pref.showOnboarding ? const OnBoardingScreen() : const HomePage());
+          Pref.showOnboarding ? const OnBoardingScreen() : const LandinPage());
     });
   }
 

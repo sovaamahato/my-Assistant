@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_assistant/intro_screens/intro_screen1.dart';
 import 'package:my_assistant/intro_screens/intro_screen2.dart';
 import 'package:my_assistant/intro_screens/intro_screen3.dart';
-import 'package:my_assistant/pages/hidden_drawer.dart';
+import 'package:my_assistant/widgets/hidden_drawer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -13,7 +13,7 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-   //controller to keep track of which page we are on
+  //controller to keep track of which page we are on
   final PageController _controller = PageController();
 
   //keep track of if we are in the last page or not
@@ -26,7 +26,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           //Creates a scrollable list that works page by page from an explicit [List] of widgets.
 
           PageView(
-           //  physics: onLastPage ? const NeverScrollableScrollPhysics() : null,
+            //  physics: onLastPage ? const NeverScrollableScrollPhysics() : null,
             controller: _controller,
             onPageChanged: (index) {
               setState(() {
@@ -47,7 +47,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               IntroPage1(),
               IntroPage2(),
               IntroPage3(),
-             
             ],
           ),
 
@@ -63,11 +62,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         _controller.jumpToPage(2);
                       },
                       child: Container(
-                         color: Colors.transparent,
-                        child: const Padding(
-                          padding: EdgeInsets.all(18.0),
-                          child: Text('skip'),
-                        ))),
+                          color: Colors.transparent,
+                          child: const Padding(
+                            padding: EdgeInsets.all(18.0),
+                            child: Text('skip'),
+                          ))),
                   SmoothPageIndicator(controller: _controller, count: 3),
 
                   //next
@@ -82,11 +81,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             ));
                           },
                           child: Container(
-                             color: Colors.transparent,
-                            child: const Padding(
-                            padding: EdgeInsets.all(18.0),
-                            child: Text('Done'),
-                          )))
+                              color: Colors.transparent,
+                              child: const Padding(
+                                padding: EdgeInsets.all(18.0),
+                                child: Text('Done'),
+                              )))
                       : GestureDetector(
                           onTap: () {
                             _controller.nextPage(
@@ -94,11 +93,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 curve: Curves.easeIn);
                           },
                           child: Container(
-                            color: Colors.transparent,
-                            child: const Padding(
-                            padding: EdgeInsets.all(18.0),
-                            child: Text('next'),
-                          ))),
+                              color: Colors.transparent,
+                              child: const Padding(
+                                padding: EdgeInsets.all(18.0),
+                                child: Text('next'),
+                              ))),
                 ],
               )),
         ],

@@ -7,7 +7,7 @@
 // import '../pallete.dart';
 // import 'home_page2.dart';
 
-// class HomePage extends StatefulWidget {
+// class Homepage extends StatefulWidget {
 //   const HomePage({super.key});
 
 //   @override
@@ -297,32 +297,18 @@ import 'package:flutter/material.dart';
 import 'package:my_assistant/utils/enum_home_type.dart';
 import 'package:my_assistant/widgets/home_card.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class LandinPage extends StatefulWidget {
+  const LandinPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<LandinPage> createState() => _LandinPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _LandinPageState extends State<LandinPage> {
   @override
   Widget build(BuildContext context) {
     Size mq = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SparkyBot'),
-        actions: [
-          IconButton(
-              padding: const EdgeInsets.only(
-                right: 10,
-              ),
-              onPressed: () {},
-              icon: const Icon(
-                Icons.brightness_5_rounded,
-                size: 26,
-              ))
-        ],
-      ),
       body: ListView(
         padding: EdgeInsets.symmetric(
             horizontal: mq.width * .04, vertical: mq.height * .015),

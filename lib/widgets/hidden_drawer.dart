@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
-import 'package:my_assistant/pages/home_page.dart';
-import 'package:my_assistant/pages/home_page2.dart';
+import 'package:my_assistant/pages/landin_page.dart';
+import 'package:my_assistant/pages/feature/sparky_bot.dart';
 import 'package:my_assistant/pallete.dart';
 
-import 'about_us.dart';
+import '../pages/about_us.dart';
 
 class HiddenDrawre extends StatefulWidget {
   const HiddenDrawre({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class _HiddenDrawreState extends State<HiddenDrawre> {
             ),
             colorLineSelected: Colors.deepPurple.shade300,
           ),
-          const HomePage()),
+          const LandinPage()),
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: "Sparky Bot",
@@ -73,13 +73,12 @@ class _HiddenDrawreState extends State<HiddenDrawre> {
   @override
   Widget build(BuildContext context) {
     return HiddenDrawerMenu(
-     
       screens: _pages,
       backgroundColorMenu: Colors.deepPurple.shade200,
       backgroundColorAppBar: Colors.deepPurple.shade200,
       backgroundColorContent: Colors.white,
       initPositionSelected: selectedPageIndex,
-     // backgroundColorSelectedMenu: Colors.deepPurple.shade300,
+      // backgroundColorSelectedMenu: Colors.deepPurple.shade300,
       //  screenSelectedBuilder: (position, controller) {
       //   setState(() {
       //     selectedPageIndex = position; // Update the selected page index
