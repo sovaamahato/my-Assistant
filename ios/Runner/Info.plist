@@ -49,5 +49,9 @@
 	<string>In order to voice assist you to slove your queries.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>In order to recognize your voice.</string>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>In order to read and write access in the phone library.</string>
+
 </dict>
 </plist>

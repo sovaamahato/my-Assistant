@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
- <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!-- internet permission -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    
+    <!-- for storaget permission -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE "/>
 
         <queries>
         <intent>
@@ -11,6 +15,7 @@
     <application
         android:label="SparkyBot"
         android:name="${applicationName}"
+        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

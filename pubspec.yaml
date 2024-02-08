@@ -47,6 +47,16 @@ dependencies:
   hive_flutter: ^1.1.0
   get: ^4.6.6
   flutter_animate: ^4.5.0
+   # For AI Image Generation
+  dart_openai: ^5.0.0
+  cached_network_image: ^3.3.0
+
+
+  # For Saving Image to Gallery
+  gallery_saver_updated: ^3.0.0
+
+  # For Sharing Image
+  share_plus: ^7.2.1
   
   
 
