@@ -255,11 +255,9 @@ class _SparkyBotState extends State<SparkyBot> {
 
                                 Visibility(
                                     visible: isLoading == true,
-                                    child: Container(
-                                      child: const CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation(Colors.blue),
-                                      ),
+                                    child: const CircularProgressIndicator(
+                                      valueColor:
+                                          AlwaysStoppedAnimation(Colors.blue),
                                     ))
                                 //           Container(
                                 //   child: isLoading

@@ -56,12 +56,14 @@ class IntroPage3 extends StatelessWidget {
                         ),
                         const Padding(
                           padding: EdgeInsets.all(28.0),
-                          child: Text(
-                            "Let's get started.",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500),
+                          child: Center(
+                            child: Text(
+                              "Let's get started.",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         )
                       ],
