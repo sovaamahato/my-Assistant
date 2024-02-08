@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_assistant/pallete.dart';
 import 'package:my_assistant/widgets/custom_button.dart';
 
 import '../../controller/image_controller.dart';
@@ -23,6 +24,7 @@ class _ImageFeatureState extends State<ImageFeature> {
     return Scaffold(
       //-----------appbar
       appBar: AppBar(
+        backgroundColor: Colors.deepPurple.shade200,
         centerTitle: true,
         title: const Text("AI Image Creator"),
         //share btn
@@ -52,68 +54,99 @@ class _ImageFeatureState extends State<ImageFeature> {
           : const SizedBox()),
       //-----------------body
 
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.only(
-            top: mq.height * .02,
-            bottom: mq.height * .1,
-            left: mq.width * .04,
-            right: mq.width * .04),
-        children: [
-          //text field
-          TextFormField(
-            controller: _c.textC,
-            textAlign: TextAlign.center,
-            minLines: 2,
-            maxLines: null,
-            onTapOutside: (e) => FocusScope.of(context).unfocus(),
-            decoration: const InputDecoration(
-                hintText:
-                    'Imagine something wonderful & innovative\nType here & I will create for you 😃',
-                hintStyle: TextStyle(fontSize: 13.5),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)))),
-          ),
+      body: Container(
+        decoration: const BoxDecoration(
+            gradient: RadialGradient(
+                transform: GradientRotation(3),
+                center: Alignment.topRight,
+                radius: 3,
+                // tileMode: TileMode.clamp,
+                colors: [
+              Pallete.color1,
+              Pallete.color2,
+              // Pallete.color2,
+              Pallete.color3,
+              //  Pallete.color4,
+              Pallete.color5,
+              Pallete.color6,
+              //  Pallete.color7,
+              // Pallete.color8,
+              Pallete.color9,
 
-          //ai image
-          Container(
-            height: mq.height * .5,
-            margin: EdgeInsets.symmetric(vertical: mq.height * .015),
-            alignment: Alignment.center,
-            child: Obx(() => _aiImage()),
-          ),
-//pxi use hunxa
-          // Obx(() => _c.imageList.isEmpty
-          //     ? const SizedBox()
-          //     : SingleChildScrollView(
-          //         scrollDirection: Axis.horizontal,
-          //         padding: EdgeInsets.only(bottom: mq.height * .03),
-          //         physics: const BouncingScrollPhysics(),
-          //         child: Wrap(
-          //           spacing: 10,
-          //           children: _c.imageList
-          //               .map((e) => InkWell(
-          //                     onTap: () {
-          //                       _c.url.value = e;
-          //                     },
-          //                     child: ClipRRect(
-          //                       borderRadius:
-          //                           const BorderRadius.all(Radius.circular(8)),
-          //                       child: CachedNetworkImage(
-          //                         imageUrl: e,
-          //                         height: 100,
-          //                         errorWidget: (context, url, error) =>
-          //                             const SizedBox(),
-          //                       ),
-          //                     ),
-          //                   ))
-          //               .toList(),
-          //         ),
-          //       )),
+              //  Pallete.color10,
 
-          //create btn
-          CustomButton(onTap: _c.createAIImage, text: 'Create'),
-        ],
+              // Pallete.whiteColor,
+
+              // Pallete.color4,
+              // Pallete.color10,
+              // Pallete.whiteColor,
+            ])),
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          padding: EdgeInsets.only(
+              top: mq.height * .02,
+              bottom: mq.height * .1,
+              left: mq.width * .04,
+              right: mq.width * .04),
+          children: [
+            //text field
+            TextFormField(
+              controller: _c.textC,
+              textAlign: TextAlign.center,
+              minLines: 2,
+              maxLines: null,
+              onTapOutside: (e) => FocusScope.of(context).unfocus(),
+              decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Color.fromARGB(255, 145, 174, 243),
+                  hintText:
+                      'Imagine something wonderful & innovative\nType here & I will create for you 😃',
+                  hintStyle: TextStyle(fontSize: 13.5),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)))),
+            ),
+
+            //ai image
+            Container(
+              height: mq.height * .5,
+              margin: EdgeInsets.symmetric(vertical: mq.height * .015),
+              alignment: Alignment.center,
+              child: Obx(() => _aiImage()),
+            ),
+            //pxi use hunxa
+            Obx(() => _c.imageList.isEmpty
+                ? const SizedBox()
+                : SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(bottom: mq.height * .03),
+                    physics: const BouncingScrollPhysics(),
+                    child: Wrap(
+                      spacing: 10,
+                      children: _c.imageList
+                          .map((e) => InkWell(
+                                onTap: () {
+                                  _c.url.value = e;
+                                },
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(8)),
+                                  child: CachedNetworkImage(
+                                    imageUrl: e,
+                                    height: 100,
+                                    errorWidget: (context, url, error) =>
+                                        const SizedBox(),
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                    ),
+                  )),
+
+            //create btn
+            // CustomButton(onTap: _c.createAIImage, text: 'Create'),
+            CustomButton(onTap: _c.searchAiImage, text: 'Create'),
+          ],
+        ),
       ),
     );
   }

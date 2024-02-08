@@ -3,8 +3,11 @@
     <!-- internet permission -->
     <uses-permission android:name="android.permission.INTERNET"/>
     
-    <!-- for storaget permission -->
+    <!-- for storage permission -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE "/>
+    
+    <!-- Ads Permission for Android 13 or higher -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
         <queries>
         <intent>

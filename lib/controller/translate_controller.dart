@@ -45,6 +45,24 @@ class TranslateController extends GetxController {
       from.value = t;
     }
   }
+  Future<void> googleTranslate() async {
+    if (textC.text.trim().isNotEmpty && to.isNotEmpty) {
+      status.value = Status.loading;
+
+      resultC.text = await OpenAIService.googleTranslate(
+          from: jsonLang[from.value] ?? 'auto',
+          to: jsonLang[to.value] ?? 'en',
+          text: textC.text);
+
+      status.value = Status.complete;
+    } else {
+      status.value = Status.none;
+      if (to.isEmpty) MyDialog.info('Select To Language!');
+      if (textC.text.isEmpty) {
+        MyDialog.info('Type Something to Translate!');
+      }
+    }
+  }
 
   late final lang = jsonLang.keys.toList();
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_assistant/pallete.dart';
 import 'package:my_assistant/utils/enum_home_type.dart';
+import 'package:my_assistant/utils/ad_helper.dart';
 
 class HomeCard extends StatelessWidget {
   final HomeType homeType;
@@ -14,7 +16,7 @@ class HomeCard extends StatelessWidget {
 
     Size mq = MediaQuery.of(context).size;
     return Card(
-      color: Colors.blue.withOpacity(.2),
+      color: const Color.fromARGB(255, 145, 174, 243),
       elevation: 0,
       margin: EdgeInsets.only(bottom: mq.height * .02),
       shape: const RoundedRectangleBorder(
@@ -23,6 +25,8 @@ class HomeCard extends StatelessWidget {
         ),
       ),
       child: InkWell(
+        //for ads
+        // onTap: () => AdHelper.showInterstitialAd(homeType.onTap),
         onTap: homeType.onTap,
         borderRadius: BorderRadius.circular(20),
         child: homeType.leftAlign

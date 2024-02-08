@@ -24,7 +24,7 @@ class _HiddenDrawreState extends State<HiddenDrawre> {
     _pages = [
       ScreenHiddenDrawer(
           ItemHiddenMenu(
-            name: "Landing Page ",
+            name: "HomePage ",
             baseStyle: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,

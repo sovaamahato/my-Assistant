@@ -83,174 +83,202 @@ class _SparkyBotState extends State<SparkyBot> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.purple,
-      body: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            const AssistantImgAnimation(),
-            SingleChildScrollView(
-              child: Stack(
-                children: [
-//----------------------------------paxadi ko wave------------
-                  // Positioned.fill(
-                  //     top: -500,
-                  //     right: 0,
-                  //     bottom: 0,
-                  //     left: 0,
-                  //     child: Image.asset(
-                  //       "assets/images/wave.png",
-                  //       fit: BoxFit.cover,
-                  //       // width: MediaQuery.of(context)
-                  //       //     .size
-                  //       //     .width, // Set the width to the screen width
-                  //       // height: MediaQuery.of(context).size.height,
-                  //       //alignment: Alignment.topRight,
-                  //     )),
-                  Column(children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-//--answer display hune bubble------------------------
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 10),
-                      margin: const EdgeInsets.symmetric(horizontal: 35)
-                          .copyWith(top: 10),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Pallete.borderColor),
-                          borderRadius: BorderRadius.circular(20)
-                              .copyWith(topLeft: Radius.zero)),
-                      child: Text(
-                        generatedContent == null
-                            ? "Hello ! what task can i do for you?"
-                            : generatedContent!,
-                        style: TextStyle(
-                            color: Pallete.whiteColor,
-                            fontFamily: "Cera Pro",
-                            fontSize: generatedContent == null ? 25 : 18),
+      // backgroundColor: Colors.purple,
+      body: Container(
+        decoration: const BoxDecoration(
+            gradient: RadialGradient(
+                transform: GradientRotation(3),
+                center: Alignment.topRight,
+                radius: 3,
+                // tileMode: TileMode.clamp,
+                colors: [
+              Pallete.color1,
+              Pallete.color2,
+              // Pallete.color2,
+              Pallete.color3,
+              //  Pallete.color4,
+              Pallete.color5,
+              Pallete.color6,
+              //  Pallete.color7,
+              // Pallete.color8,
+              Pallete.color9,
+
+              //  Pallete.color10,
+
+              // Pallete.whiteColor,
+
+              // Pallete.color4,
+              // Pallete.color10,
+              // Pallete.whiteColor,
+            ])),
+        child: SafeArea(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              const AssistantImgAnimation(),
+              SingleChildScrollView(
+                child: Stack(
+                  children: [
+                    //----------------------------------paxadi ko wave------------
+                    // Positioned.fill(
+                    //     top: -500,
+                    //     right: 0,
+                    //     bottom: 0,
+                    //     left: 0,
+                    //     child: Image.asset(
+                    //       "assets/images/wave.png",
+                    //       fit: BoxFit.cover,
+                    //       // width: MediaQuery.of(context)
+                    //       //     .size
+                    //       //     .width, // Set the width to the screen width
+                    //       // height: MediaQuery.of(context).size.height,
+                    //       //alignment: Alignment.topRight,
+                    //     )),
+                    Column(children: [
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-
-                    //----------------------------textfield to write questions-------------------
-
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Container(
+                      //--answer display hune bubble------------------------
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 10),
+                        margin: const EdgeInsets.symmetric(horizontal: 35)
+                            .copyWith(top: 10),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Pallete.secondSuggestionBoxColor),
-                        child: Row(children: [
-                          Expanded(
-                              child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextField(
-                              controller: textController.chatController,
-                              decoration: const InputDecoration(
-                                  hintText: "Message",
-                                  border: InputBorder.none),
-                            ),
-                          )),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              GestureDetector(
-                                  onTap: () async {
-                                    if (await speechToText.hasPermission &&
-                                        speechToText.isNotListening) {
-                                      await startListening();
-                                    } else if (speechToText.isListening) {
-                                      final speech = await openAIService
-                                          .chatGPTAPI(lastWords);
+                            border: Border.all(color: Pallete.borderColor),
+                            borderRadius: BorderRadius.circular(20)
+                                .copyWith(topLeft: Radius.zero)),
+                        child: Text(
+                          generatedContent == null
+                              ? "Hello ! what task can i do for you?"
+                              : generatedContent!,
+                          style: TextStyle(
+                              color: Pallete.whiteColor,
+                              fontFamily: "Cera Pro",
+                              fontSize: generatedContent == null ? 25 : 18),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
 
-                                      await systemSpeak(speech);
+                      //----------------------------textfield to write questions-------------------
 
-                                      generatedContent = speech;
-                                      isSpeechGenerated = true;
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Pallete.secondSuggestionBoxColor),
+                          child: Row(children: [
+                            Expanded(
+                                child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextField(
+                                controller: textController.chatController,
+                                decoration: const InputDecoration(
+                                    hintText: "Message",
+                                    border: InputBorder.none),
+                              ),
+                            )),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                GestureDetector(
+                                    onTap: () async {
+                                      if (await speechToText.hasPermission &&
+                                          speechToText.isNotListening) {
+                                        await startListening();
+                                      } else if (speechToText.isListening) {
+                                        final speech = await openAIService
+                                            .chatGPTAPI(lastWords);
+
+                                        await systemSpeak(speech);
+
+                                        generatedContent = speech;
+                                        isSpeechGenerated = true;
+
+                                        setState(() {});
+                                        await stopListening();
+                                      } else {
+                                        isSpeechGenerated = false;
+                                        initSpeechToText();
+                                      }
+                                    },
+                                    child: speechToText.isListening
+                                        ? const Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Icon(
+                                              Icons.stop,
+                                              color: Colors.deepPurple,
+                                              size: 35,
+                                            ),
+                                          )
+                                        : const Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Icon(
+                                              Icons.mic,
+                                              color: Colors.deepPurple,
+                                              size: 35,
+                                            ),
+                                          )),
+                                GestureDetector(
+                                    onTap: () async {
+                                      isLoading = true;
+                                      try {
+                                        final speech = await openAIService
+                                            .chatGPTAPI(textController
+                                                .chatController.text);
+
+                                        await systemSpeak(speech);
+
+                                        generatedContent = speech;
+                                        textController.chatController.clear();
+                                      } catch (e) {
+                                        //
+                                      } finally {
+                                        isLoading = false;
+                                      }
 
                                       setState(() {});
-                                      await stopListening();
-                                    } else {
-                                      isSpeechGenerated = false;
-                                      initSpeechToText();
-                                    }
-                                  },
-                                  child: speechToText.isListening
-                                      ? const Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Icon(
-                                            Icons.stop,
-                                            color: Colors.deepPurple,
-                                            size: 35,
-                                          ),
-                                        )
-                                      : const Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Icon(
-                                            Icons.mic,
-                                            color: Colors.deepPurple,
-                                            size: 35,
-                                          ),
-                                        )),
-                              GestureDetector(
-                                  onTap: () async {
-                                    isLoading = true;
-                                    try {
-                                      final speech = await openAIService
-                                          .chatGPTAPI(textController
-                                              .chatController.text);
+                                    },
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(12.0),
+                                      child: Icon(
+                                        Icons.send,
+                                        size: 35,
+                                        color: Colors.deepPurple,
+                                      ),
+                                    )),
 
-                                      await systemSpeak(speech);
-
-                                      generatedContent = speech;
-                                      textController.chatController.clear();
-                                    } catch (e) {
-                                      //
-                                    } finally {
-                                      isLoading = false;
-                                    }
-
-                                    setState(() {});
-                                  },
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(12.0),
-                                    child: Icon(
-                                      Icons.send,
-                                      size: 35,
-                                      color: Colors.deepPurple,
-                                    ),
-                                  )),
-
-                              Visibility(
-                                  visible: isLoading == true,
-                                  child: Container(
-                                    child: const CircularProgressIndicator(
-                                      valueColor:
-                                          AlwaysStoppedAnimation(Colors.blue),
-                                    ),
-                                  ))
-                              //           Container(
-                              //   child: isLoading
-                              //       ? CircularProgressIndicator(
-                              //           valueColor: AlwaysStoppedAnimation(Colors.blue),
-                              //         )
-                              //       : Text(generatedContent!)
-                              // ),
-                            ],
-                          )
-                        ]),
-                      ),
-                    )
-                  ]),
-                ],
+                                Visibility(
+                                    visible: isLoading == true,
+                                    child: Container(
+                                      child: const CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation(Colors.blue),
+                                      ),
+                                    ))
+                                //           Container(
+                                //   child: isLoading
+                                //       ? CircularProgressIndicator(
+                                //           valueColor: AlwaysStoppedAnimation(Colors.blue),
+                                //         )
+                                //       : Text(generatedContent!)
+                                // ),
+                              ],
+                            )
+                          ]),
+                        ),
+                      )
+                    ]),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

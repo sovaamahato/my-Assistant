@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:my_assistant/pages/startup_pages/splash_screen.dart';
+import 'package:my_assistant/utils/ad_helper.dart';
 import 'package:my_assistant/utils/pref.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // init hive
   await Pref.initialize();
+   // for initializing facebook ads sdk
+  AdHelper.init();
+
   //making app full screen
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await SystemChrome.setPreferredOrientations(
