@@ -62,6 +62,7 @@ dependencies:
   translator_plus: ^1.0.1
   # Facebook Ads
   easy_audience_network: ^0.0.6
+  url_launcher: ^6.2.4
 
 
   

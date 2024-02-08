@@ -40,32 +40,38 @@ class IntroPage1 extends StatelessWidget {
                     // Pallete.color10,
                     // Pallete.whiteColor,
                   ])),
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 60, left: 20, right: 10),
-                        child: BounceInDown(
-                            child: Image.asset("assets/images/robo.png")),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(28.0),
-                        child: Text(
-                          "Hello, I am ChatGPT , a large language model trained by OpenAI. I can answer questions, generate text, and assist with various tasks . I am a work in progress , so please be patient with me",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        const SizedBox(
+                          height: 50,
                         ),
-                      )
-                    ],
-                  ),
-                ],
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 60, left: 20, right: 10),
+                          child: BounceInDown(
+                              child: Image.asset("assets/images/robo.png")),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(28.0),
+                          child: Center(
+                            child: Text(
+                              "Hello, I am ChatGPT , a large language model trained by OpenAI. I can answer questions, generate text, and assist with various tasks . I am a work in progress , so please be patient with me",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                        
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

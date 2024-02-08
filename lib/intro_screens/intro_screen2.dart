@@ -52,12 +52,14 @@ class IntroPage2 extends StatelessWidget {
                         ),
                         const Padding(
                           padding: EdgeInsets.all(28.0),
-                          child: Text(
-                            "To use ChatGPT, you can simply ask it a question or give it a prompt and it will generate a response. For example ask it a question like \"What is the capital of Nepal ?\" or give it a prompt like \"Write a poem on Flutter\".",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500),
+                          child: Center(
+                            child: Text(
+                              "To use ChatGPT, you can simply ask it a question or give it a prompt and it will generate a response. For example ask it a question like \"What is the capital of Nepal ?\" or give it a prompt like \"Write a poem on Flutter\".",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         )
                       ],

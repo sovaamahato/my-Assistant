@@ -49,7 +49,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               IntroPage3(),
             ],
           ),
-
+          
           //dot indicators
           Container(
               alignment: const Alignment(0, 0.75),
@@ -62,7 +62,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         _controller.jumpToPage(2);
                       },
                       child: Container(
-                          color: Colors.transparent,
+                          // color: Colors.transparent,
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 145, 174, 243),
+                              borderRadius: BorderRadius.circular(95)),
                           child: const Padding(
                             padding: EdgeInsets.all(18.0),
                             child: Text('skip'),
@@ -81,7 +84,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             ));
                           },
                           child: Container(
-                              color: Colors.transparent,
+                              decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 145, 174, 243),
+                              borderRadius: BorderRadius.circular(95)),
                               child: const Padding(
                                 padding: EdgeInsets.all(18.0),
                                 child: Text('Done'),
@@ -93,7 +98,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 curve: Curves.easeIn);
                           },
                           child: Container(
-                              color: Colors.transparent,
+                             decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 145, 174, 243),
+                              borderRadius: BorderRadius.circular(95)),
                               child: const Padding(
                                 padding: EdgeInsets.all(18.0),
                                 child: Text('next'),
