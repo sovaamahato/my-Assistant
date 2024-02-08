@@ -145,6 +145,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  easy_audience_network:
+    dependency: "direct main"
+    description:
+      name: easy_audience_network
+      sha256: "3bd9f76785163e898683cf59d2c1799f8cd6d04afcd601dd981ced03763bbe93"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
   fake_async:
     dependency: transitive
     description:
@@ -629,6 +637,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
+  translator_plus:
+    dependency: "direct main"
+    description:
+      name: translator_plus
+      sha256: fd1989918a5e5549fe81fde7cc7479c5939bdfcc34109ccad87a3cfadb9f5240
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   typed_data:
     dependency: transitive
     description:

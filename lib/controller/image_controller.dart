@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:gallery_saver_updated/gallery_saver.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:my_assistant/openai_services.dart';
 import 'package:my_assistant/secret.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -95,6 +96,27 @@ class ImageController extends GetxController {
       Get.back();
       MyDialog.error('Something Went Wrong (Try again in sometime)!');
       log('downloadImageE: $e');
+    }
+  }
+
+  Future<void> searchAiImage() async {
+    //if prompt is not empty
+    if (textC.text.trim().isNotEmpty) {
+      status.value = Status.loading;
+
+      imageList.value = await OpenAIService.searchAiImages(textC.text);
+
+      if (imageList.isEmpty) {
+        MyDialog.error('Something went wrong (Try again in sometime)');
+
+        return;
+      }
+
+      url.value = imageList.first;
+
+      status.value = Status.complete;
+    } else {
+      MyDialog.info('Provide some beautiful image description!');
     }
   }
 }

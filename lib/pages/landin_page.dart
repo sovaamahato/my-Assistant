@@ -294,7 +294,11 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:my_assistant/pallete.dart';
+import 'package:my_assistant/utils/ad_helper.dart';
 import 'package:my_assistant/utils/enum_home_type.dart';
+import 'package:my_assistant/utils/pref.dart';
 import 'package:my_assistant/widgets/home_card.dart';
 
 class LandinPage extends StatefulWidget {
@@ -305,18 +309,104 @@ class LandinPage extends StatefulWidget {
 }
 
 class _LandinPageState extends State<LandinPage> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  //  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  //   Pref.showOnboarding = false;
+  // }
+
+  // when user want to close the app
+  void showBackDialog() {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.deepPurple.shade200,
+          title: const Text('Are you sure?'),
+          content: const Text(
+            'Are you sure you want to leave this Application?',
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Yes'),
+              onPressed: () {
+                // Navigator.pop(context);
+                // Navigator.pop(context);
+                SystemNavigator.pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size mq = MediaQuery.of(context).size;
-    return Scaffold(
-      body: ListView(
-        padding: EdgeInsets.symmetric(
-            horizontal: mq.width * .04, vertical: mq.height * .015),
-        children: HomeType.values
-            .map((e) => HomeCard(
-                  homeType: e,
-                ))
-            .toList(),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) {
+        if (didPop) {
+          return;
+        }
+        showBackDialog();
+      },
+      child: SafeArea(
+        child: Scaffold(
+          body: Container(
+            decoration: const BoxDecoration(
+                gradient: RadialGradient(
+                    transform: GradientRotation(3),
+                    center: Alignment.topRight,
+                    radius: 3,
+                    // tileMode: TileMode.clamp,
+                    colors: [
+                  //  Pallete.color1,
+                  Pallete.color2,
+                  // Pallete.color2,
+                  Pallete.color3,
+                  //  Pallete.color4,
+                  Pallete.color5,
+                  Pallete.color6,
+                  //  Pallete.color7,
+                  // Pallete.color8,
+                  Pallete.color9,
+
+                  //  Pallete.color10,
+
+                  // Pallete.whiteColor,
+
+                  // Pallete.color4,
+                  // Pallete.color10,
+                  // Pallete.whiteColor,
+                ])),
+            child: ListView(
+              padding: EdgeInsets.symmetric(
+                  horizontal: mq.width * .04, vertical: mq.height * .015),
+              children: HomeType.values
+                  .map((e) => HomeCard(
+                        homeType: e,
+                      ))
+                  .toList(),
+            ),
+          ),
+          //ad
+         // bottomNavigationBar: AdHelper.nativeBannerAd(),
+        ),
       ),
     );
   }
