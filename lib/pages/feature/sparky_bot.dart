@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:my_assistant/controller/chat_controller.dart';
 import 'package:my_assistant/widgets/assistant_img_animation.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
@@ -91,7 +90,7 @@ class _SparkyBotState extends State<SparkyBot> {
             const SizedBox(
               height: 20,
             ),
-            AssistantImgAnimation(),
+            const AssistantImgAnimation(),
             SingleChildScrollView(
               child: Stack(
                 children: [
@@ -230,7 +229,7 @@ class _SparkyBotState extends State<SparkyBot> {
                               Visibility(
                                   visible: isLoading == true,
                                   child: Container(
-                                    child: CircularProgressIndicator(
+                                    child: const CircularProgressIndicator(
                                       valueColor:
                                           AlwaysStoppedAnimation(Colors.blue),
                                     ),

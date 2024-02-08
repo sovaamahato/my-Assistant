@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:my_assistant/pallete.dart';
 
 class FeatureBox extends StatelessWidget {
-  final headerText;
-  final descriptionText;
+  final String headerText;
+  final String descriptionText;
   final color;
-  const FeatureBox({ required this.headerText,required this.descriptionText, required this.color});
+  const FeatureBox({super.key,  required this.headerText,required this.descriptionText, required this.color});
 
   @override
   Widget build(BuildContext context) {
