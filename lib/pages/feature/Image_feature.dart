@@ -5,7 +5,6 @@ import 'package:lottie/lottie.dart';
 import 'package:my_assistant/widgets/custom_button.dart';
 
 import '../../controller/image_controller.dart';
-import '../../utils/enum_home_type.dart';
 import '../../widgets/custom_loading.dart';
 
 class ImageFeature extends StatefulWidget {

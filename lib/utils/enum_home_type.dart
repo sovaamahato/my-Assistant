@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_assistant/pages/feature/Image_feature.dart';
+import 'package:my_assistant/pages/feature/image_feature.dart';
 import 'package:my_assistant/pages/feature/sparky_bot.dart';
 import 'package:my_assistant/pages/feature/translator_feature.dart';
 
@@ -37,7 +37,7 @@ extension MyHomeType on HomeType {
   //for padding
   VoidCallback get onTap => switch (this) {
         HomeType.aiChatBot => () => Get.to(() => const SparkyBot()),
-        HomeType.aiImage => () => Get.to(() => ImageFeature()),
-        HomeType.aiTranslator => () => Get.to(() => TranslatorFeature()),
+        HomeType.aiImage => () => Get.to(() => const ImageFeature()),
+        HomeType.aiTranslator => () => Get.to(() => const TranslatorFeature()),
       };
 }

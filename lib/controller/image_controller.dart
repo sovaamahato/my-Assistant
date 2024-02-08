@@ -10,7 +10,6 @@ import 'package:my_assistant/secret.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../openai_services.dart';
 import '../widgets/my_dialog.dart';
 
 enum Status { none, loading, complete }
